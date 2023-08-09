@@ -8,7 +8,7 @@ import Form from '@/components/atoms/Form.vue'
 
 <template>
   <div class="center mt-11 mb-8">
-    <h1 class="text-3xl tracking-wide mb-4"
+    <h1 class="text-3xl tracking-wide mb-10"
     >
       ログインページ
     </h1>
