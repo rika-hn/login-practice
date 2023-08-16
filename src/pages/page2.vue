@@ -1,9 +1,5 @@
 <script setup>
-// import { useCounterStore } from '~/store/counter'
 import Form from '@/components/atoms/Form.vue'
-
-// const counter = useCounterStore()
-
 </script>
 
 <template>

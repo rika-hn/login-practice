@@ -3,22 +3,22 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   srcDir: 'src/',
   css: [
-    '~/assets/css/tailwind.css',
-    '@fortawesome/fontawesome-svg-core/styles.css'
+    '@/assets/css/tailwind.css',
   ],
   modules: [
     '@pinia/nuxt',
   ],
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
+  build: {
+    postcss: {
+      postcssOptions: {
+        plugins: {
+          tailwindcss: {},
+          autoprefixer: {},
+        },
+      },
     },
   },
-  build: {
-    transpile: ['@fortawesome/vue-fontawesome']
-  }
+  serverMiddleware: [
+    { path: '/api', handler: '~/server/index.ts' }
+  ]
 })
-// export default defineNuxtPlugin((nuxtApp) => {
-//   nuxtApp.vueApp.component('font-awesome-icon', FontAwesomeIcon, {})
-// })

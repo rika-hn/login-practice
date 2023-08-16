@@ -1,24 +1,23 @@
 <script setup lang="ts">
-import { loginUser } from '@/api/api';
+// import { loginUser } from '@/api/api';
+import { useAsyncData } from '@/utils/hook'; // あなたのディレクトリに合わせて修正
+import { useAuthStore } from '~/store/auth';
 
-const email = ref('');
-const password = ref('');
+    const { error, execute } = useAsyncData();
+    const email = ref('');
+    const password = ref('');
 
-const handleLogin = async (event: Event) => {
-    event.preventDefault();  // フォームのデフォルトの送信動作をキャンセルする
-    try {
-        const response = await loginUser(email.value, password.value);
-        console.log("ログイン成功！")
+    const authStore = useAuthStore();
 
-    } catch (error) {
-        console.log("ログインに失敗しました")
-    }
-};
-
+    const login = async () => {
+      if (email.value && password.value) {
+        await execute(authStore.login, { email: email.value, password: password.value });
+      }
+    };
 </script>
 <template>
-<form 
-@submit="handleLogin"
+<form
+@submit="login"
 >
     <input
     class="block border rounded-sm border-solid mb-2 text-sm px-1 py-1"
@@ -35,6 +34,7 @@ const handleLogin = async (event: Event) => {
     type="submit"
     >
     ログイン
-</button>
+    </button>
+    <p v-if="error">{{ error }}</p>
 </form>
 </template>
